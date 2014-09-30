@@ -1,0 +1,10 @@
+framework module PresentPrePermissions {
+  umbrella header "PresentPrePermissions.h"
+
+  export *
+  module * { export * }
+}
+
+module PresentPrePermissions.Swift {
+    header "PresentPrePermissions-Swift.h"
+}

@@ -1,15 +1,15 @@
 //
-//  PresentPrePermissionsTests.swift
-//  PresentPrePermissionsTests
+//  PresentPrePermissionsExampleTests.swift
+//  PresentPrePermissionsExampleTests
 //
 //  Created by Justin Makaila on 9/29/14.
-//  Copyright (c) 2014 Justin Makaila. All rights reserved.
+//
 //
 
 import UIKit
 import XCTest
 
-class PresentPrePermissionsTests: XCTestCase {
+class PresentPrePermissionsExampleTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

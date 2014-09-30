@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PresentPrePermissionExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3R-1R-3T5">
+                                <rect key="frame" x="65" y="117" width="190" height="30"/>
+                                <state key="normal" title="Request Photo Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestPhotoPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JXp-m9-fAY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6V-9X-yBe">
+                                <rect key="frame" x="56" y="162" width="209" height="30"/>
+                                <state key="normal" title="Request Location Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestLocationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TOI-HR-QgC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ql-e3-fOp">
+                                <rect key="frame" x="55" y="72" width="211" height="30"/>
+                                <state key="normal" title="Request Contacts Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestContactsPermissionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dly-K6-Ack"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQL-Yl-iQ9">
+                                <rect key="frame" x="18" y="207" width="285" height="30"/>
+                                <state key="normal" title="Request Remote Notification Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestNotificationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOt-nN-Iw3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i6V-9X-yBe" firstAttribute="top" secondItem="C3R-1R-3T5" secondAttribute="bottom" constant="15" id="C9I-C5-fu1"/>
+                            <constraint firstAttribute="centerX" secondItem="i6V-9X-yBe" secondAttribute="centerX" id="K9D-gZ-v8Q"/>
+                            <constraint firstAttribute="centerX" secondItem="rQL-Yl-iQ9" secondAttribute="centerX" id="Kpn-l5-5Us"/>
+                            <constraint firstItem="7ql-e3-fOp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="72" id="OMb-LF-VqF"/>
+                            <constraint firstAttribute="centerX" secondItem="7ql-e3-fOp" secondAttribute="centerX" id="Opn-r6-4av"/>
+                            <constraint firstItem="rQL-Yl-iQ9" firstAttribute="top" secondItem="i6V-9X-yBe" secondAttribute="bottom" constant="15" id="YAE-xU-aKK"/>
+                            <constraint firstItem="C3R-1R-3T5" firstAttribute="top" secondItem="7ql-e3-fOp" secondAttribute="bottom" constant="15" id="adD-Wm-pCg"/>
+                            <constraint firstAttribute="centerX" secondItem="C3R-1R-3T5" secondAttribute="centerX" id="wwz-Le-nbB"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
