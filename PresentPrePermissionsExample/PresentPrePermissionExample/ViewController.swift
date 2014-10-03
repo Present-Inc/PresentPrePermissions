@@ -10,6 +10,10 @@ import UIKit
 import PresentPrePermissions
 
 class ViewController: UIViewController {
+    var permissionsManager: PresentPrePermissions {
+        return PresentPrePermissions.sharedPermissions()
+    }
+    
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
             println("Was access granted? \(granted)")
@@ -19,8 +23,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func requestPhotoPermissionsPressed(_: AnyObject) {
-        PresentPrePermissions
-            .sharedPermissions()
+        permissionsManager
             .showPhotoPermission(
                 message: "Can I access your photos?",
                 denyButtonTitle: "No",
@@ -29,9 +32,11 @@ class ViewController: UIViewController {
             )
     }
     
+    /**
+        The message presented by the system location prompt is set in the Info.plist
+     */
     @IBAction func requestLocationPermissionsPressed(_: AnyObject) {
-        PresentPrePermissions
-            .sharedPermissions()
+        permissionsManager
             .showLocationPermission(
                 message: "Can I access your location?",
                 denyButtonTitle: "No",
@@ -41,22 +46,43 @@ class ViewController: UIViewController {
     }
     
     @IBAction func requestNotificationPermissionsPressed(_: AnyObject) {
-        PresentPrePermissions
-            .sharedPermissions()
+        permissionsManager
             .showRemoteNotificationPermission(
                 title: "Can I send you push notifications?",
                 message: "I won't abuse it, scout's honor!",
+                denyButtonTitle: "No",
+                grantButtonTitle: "Yes",
+                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound),
+                completion: self.completionHandler
+            )
+    }
+    
+    @IBAction func requestContactsPermissionPressed(_: AnyObject) {
+        permissionsManager
+            .showContactsPermission(
+                message: "Can I access your contacts?",
                 denyButtonTitle: "No",
                 grantButtonTitle: "Yes",
                 completion: self.completionHandler
             )
     }
     
-    @IBAction func requestContactsPermissionPressed(_: AnyObject) {
-        PresentPrePermissions
-            .sharedPermissions()
-            .showContactsPermission(
-                message: "Can I access your contacts?",
+    @IBAction func requestCameraPermissionsPressed(_: AnyObject) {
+        permissionsManager
+            .showCameraPermission(
+                title: "Grant Camera Access?",
+                message: "Can I access your camera?",
+                denyButtonTitle: "No",
+                grantButtonTitle: "Yes",
+                completion: self.completionHandler
+            )
+    }
+    
+    @IBAction func requestMicrophonePermissionsPressed(_: AnyObject) {
+        permissionsManager
+            .showMicrophonePermission(
+                title: "Grant Microphone Access?",
+                message: "Can I access your microphone?",
                 denyButtonTitle: "No",
                 grantButtonTitle: "Yes",
                 completion: self.completionHandler

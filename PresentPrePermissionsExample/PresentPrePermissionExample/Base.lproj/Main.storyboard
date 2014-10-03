@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PresentPrePermissionExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PresentPrePermissionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="requestPhotoPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JXp-m9-fAY"/>
+                                    <action selector="requestPhotoPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qXD-CG-L6r"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6V-9X-yBe">
@@ -31,7 +31,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="requestLocationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TOI-HR-QgC"/>
+                                    <action selector="requestLocationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ybA-BC-rkK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ql-e3-fOp">
@@ -40,7 +40,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="requestContactsPermissionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dly-K6-Ack"/>
+                                    <action selector="requestContactsPermissionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lUW-vE-aW8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQL-Yl-iQ9">
@@ -49,7 +49,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="requestNotificationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOt-nN-Iw3"/>
+                                    <action selector="requestNotificationPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jzz-ve-oPp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDK-Ye-B8G">
+                                <rect key="frame" x="59" y="252" width="203" height="30"/>
+                                <state key="normal" title="Request Camera Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestCameraPermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kIt-zS-Ide"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-7E-GY7">
+                                <rect key="frame" x="45" y="297" width="231" height="30"/>
+                                <state key="normal" title="Request Microphone Permissions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="requestMicrophonePermissionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mTh-Ad-ghF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -60,8 +78,12 @@
                             <constraint firstAttribute="centerX" secondItem="rQL-Yl-iQ9" secondAttribute="centerX" id="Kpn-l5-5Us"/>
                             <constraint firstItem="7ql-e3-fOp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="72" id="OMb-LF-VqF"/>
                             <constraint firstAttribute="centerX" secondItem="7ql-e3-fOp" secondAttribute="centerX" id="Opn-r6-4av"/>
+                            <constraint firstAttribute="centerX" secondItem="NDK-Ye-B8G" secondAttribute="centerX" id="Qf6-aQ-bRA"/>
+                            <constraint firstItem="3pZ-7E-GY7" firstAttribute="top" secondItem="NDK-Ye-B8G" secondAttribute="bottom" constant="15" id="Y8l-yD-1mt"/>
                             <constraint firstItem="rQL-Yl-iQ9" firstAttribute="top" secondItem="i6V-9X-yBe" secondAttribute="bottom" constant="15" id="YAE-xU-aKK"/>
                             <constraint firstItem="C3R-1R-3T5" firstAttribute="top" secondItem="7ql-e3-fOp" secondAttribute="bottom" constant="15" id="adD-Wm-pCg"/>
+                            <constraint firstAttribute="centerX" secondItem="3pZ-7E-GY7" secondAttribute="centerX" id="hII-CT-Z4t"/>
+                            <constraint firstItem="NDK-Ye-B8G" firstAttribute="top" secondItem="rQL-Yl-iQ9" secondAttribute="bottom" constant="15" id="mdk-7z-WDv"/>
                             <constraint firstAttribute="centerX" secondItem="C3R-1R-3T5" secondAttribute="centerX" id="wwz-Le-nbB"/>
                         </constraints>
                     </view>

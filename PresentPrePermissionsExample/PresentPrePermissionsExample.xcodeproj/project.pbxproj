@@ -11,10 +11,9 @@
 		7C1C25D519DA29C00098BE47 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C25CD19DA29C00098BE47 /* LaunchScreen.xib */; };
 		7C1C25D619DA29C00098BE47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C25CF19DA29C00098BE47 /* Main.storyboard */; };
 		7C1C25D719DA29C00098BE47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C25D119DA29C00098BE47 /* Images.xcassets */; };
-		7C1C25D819DA29C00098BE47 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C25D219DA29C00098BE47 /* Info.plist */; };
 		7C1C25D919DA29C00098BE47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C25D319DA29C00098BE47 /* ViewController.swift */; };
-		7C1C25DC19DA2A220098BE47 /* PresentPrePermissions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1C25DB19DA2A220098BE47 /* PresentPrePermissions.framework */; };
-		7CD112A119DA2AA000178551 /* PresentPrePermissions.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7C1C25DB19DA2A220098BE47 /* PresentPrePermissions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7CEC6A2319DE356B00ED2142 /* PresentPrePermissions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEC6A2219DE356B00ED2142 /* PresentPrePermissions.framework */; };
+		7CEC6A2419DE36EE00ED2142 /* PresentPrePermissions.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7CEC6A2219DE356B00ED2142 /* PresentPrePermissions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7CD112A119DA2AA000178551 /* PresentPrePermissions.framework in CopyFiles */,
+				7CEC6A2419DE36EE00ED2142 /* PresentPrePermissions.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +39,7 @@
 		7C1C25D119DA29C00098BE47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C1C25D219DA29C00098BE47 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1C25D319DA29C00098BE47 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7C1C25DB19DA2A220098BE47 /* PresentPrePermissions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PresentPrePermissions.framework; sourceTree = "<group>"; };
+		7CEC6A2219DE356B00ED2142 /* PresentPrePermissions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PresentPrePermissions.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1C25DC19DA2A220098BE47 /* PresentPrePermissions.framework in Frameworks */,
+				7CEC6A2319DE356B00ED2142 /* PresentPrePermissions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +91,7 @@
 		7C1C25CB19DA29C00098BE47 /* PresentPrePermissionExample */ = {
 			isa = PBXGroup;
 			children = (
-				7C1C25DB19DA2A220098BE47 /* PresentPrePermissions.framework */,
+				7CEC6A2219DE356B00ED2142 /* PresentPrePermissions.framework */,
 				7C1C25CC19DA29C00098BE47 /* AppDelegate.swift */,
 				7C1C25CD19DA29C00098BE47 /* LaunchScreen.xib */,
 				7C1C25CF19DA29C00098BE47 /* Main.storyboard */,
@@ -134,6 +133,11 @@
 				TargetAttributes = {
 					7C1C25A719DA29A30098BE47 = {
 						CreatedOnToolsVersion = 6.0.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -160,7 +164,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1C25D819DA29C00098BE47 /* Info.plist in Resources */,
 				7C1C25D719DA29C00098BE47 /* Images.xcassets in Resources */,
 				7C1C25D519DA29C00098BE47 /* LaunchScreen.xib in Resources */,
 				7C1C25D619DA29C00098BE47 /* Main.storyboard in Resources */,
@@ -259,7 +262,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce3d2c4e-c370-48eb-9dc2-ec65f1f07456";
+				PROVISIONING_PROFILE = "be74b3b1-75aa-4e1c-8418-b46cde71cd41";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -305,7 +308,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce3d2c4e-c370-48eb-9dc2-ec65f1f07456";
+				PROVISIONING_PROFILE = "be74b3b1-75aa-4e1c-8418-b46cde71cd41";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
