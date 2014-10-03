@@ -99,4 +99,12 @@ SWIFT_CLASS("_TtC21PresentPrePermissions21PresentPrePermissions")
 @interface PresentPrePermissions (SWIFT_EXTENSION(PresentPrePermissions))
 @end
 
+
+@interface PresentPrePermissions (SWIFT_EXTENSION(PresentPrePermissions))
+@end
+
+
+@interface PresentPrePermissions (SWIFT_EXTENSION(PresentPrePermissions))
+@end
+
 #pragma clang diagnostic pop
