@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Justin Makaila. All rights reserved.
 //
 
-import UIKit
 import CoreLocation
 import AddressBook
 import AssetsLibrary
@@ -121,12 +120,11 @@ public class PresentPrePermissions: NSObject {
         }
     }
     
-    // TODO: Add a parameter for the notification types
     /*
         The completion handler will only be called if notifications are already enabled. application:didRegisterForRemoteNotificationsWithDeviceToken: and 
         application:didFailToRegisterForRemoteNotificationsWithError: should be used as completion for granting access.
      */
-    public func showRemoteNotificationPermission(title: String? = "Allow Push Notifications?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
+    public func showRemoteNotificationPermission(title: String? = "Allow Push Notifications?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, notificationTypes: UIUserNotificationType? = nil, completion: PermissionCompletionHandler?) {
         denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
         grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
         
@@ -146,7 +144,7 @@ public class PresentPrePermissions: NSObject {
                     delegate?.application?(application, didFailToRegisterForRemoteNotificationsWithError: error)
                 },
                 grantAction: {
-                    self.showRemoteNotificationSystemAlert((.Badge | .Alert | .Sound))
+                    self.showRemoteNotificationSystemAlert(notificationTypes ?? (.Badge | .Alert | .Sound))
                 }
             )
         } else {
@@ -170,6 +168,8 @@ public class PresentPrePermissions: NSObject {
                 }, grantAction: {
                     self.showCameraSystemAlert(completion)
                 })
+        } else {
+            completion?(granted: (authorizationStatus == AVAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -191,6 +191,8 @@ public class PresentPrePermissions: NSObject {
                     println("Show the microphone system alert")
                     self.showMicrophoneSystemAlert(completion)
                 })
+        } else {
+            completion?(granted: (authorizationStatus == AVAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
 }
