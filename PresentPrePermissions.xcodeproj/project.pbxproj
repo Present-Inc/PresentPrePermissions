@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7CE7CB1119DE30060028C538 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE7CB0E19DE2FEC0028C538 /* AddressBook.framework */; };
+		7CE7CB1219DE30060028C538 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE7CB0C19DE2FE80028C538 /* CoreLocation.framework */; };
+		7CE7CB1319DE30060028C538 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE7CB0A19DE2FDB0028C538 /* AssetsLibrary.framework */; };
+		7CE7CB1419DE30060028C538 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE7CB0819DE2FD40028C538 /* AVFoundation.framework */; };
 		7CEB5F6019D9F0D900FA8CD3 /* PresentPrePermissions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CEB5F5F19D9F0D900FA8CD3 /* PresentPrePermissions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7CEB5F7419D9F0EF00FA8CD3 /* PresentPrePermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB5F7319D9F0EF00FA8CD3 /* PresentPrePermissions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7CE7CB0819DE2FD40028C538 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7CE7CB0A19DE2FDB0028C538 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7CE7CB0C19DE2FE80028C538 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7CE7CB0E19DE2FEC0028C538 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7CEB5F5A19D9F0D900FA8CD3 /* PresentPrePermissions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PresentPrePermissions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEB5F5E19D9F0D900FA8CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CEB5F5F19D9F0D900FA8CD3 /* PresentPrePermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresentPrePermissions.h; sourceTree = "<group>"; };
@@ -24,6 +32,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CE7CB1119DE30060028C538 /* AddressBook.framework in Frameworks */,
+				7CE7CB1219DE30060028C538 /* CoreLocation.framework in Frameworks */,
+				7CE7CB1319DE30060028C538 /* AssetsLibrary.framework in Frameworks */,
+				7CE7CB1419DE30060028C538 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +49,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7CE7CB1019DE2FF80028C538 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CE7CB0E19DE2FEC0028C538 /* AddressBook.framework */,
+				7CE7CB0C19DE2FE80028C538 /* CoreLocation.framework */,
+				7CE7CB0A19DE2FDB0028C538 /* AssetsLibrary.framework */,
+				7CE7CB0819DE2FD40028C538 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7CEB5F5019D9F0D900FA8CD3 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +90,7 @@
 		7CEB5F5D19D9F0D900FA8CD3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7CE7CB1019DE2FF80028C538 /* Frameworks */,
 				7CEB5F5E19D9F0D900FA8CD3 /* Info.plist */,
 			);
 			name = "Supporting Files";
