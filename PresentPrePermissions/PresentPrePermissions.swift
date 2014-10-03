@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import AddressBook
 import AssetsLibrary
+import AVFoundation
 
 public enum PresentDialogResult: String {
     case NoAction = "No Action"
@@ -152,6 +153,46 @@ public class PresentPrePermissions: NSObject {
             completion?(granted: true, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
+    
+    public func showCameraPermission(title: String? = "Allow Camera Access?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
+        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
+        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+        
+        var authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        if authorizationStatus == AVAuthorizationStatus.NotDetermined {
+            self.showAlertView(
+                title!,
+                message: message!,
+                denyButtonTitle: denyButtonTitle!,
+                grantButtonTitle: grantButtonTitle!,
+                denyAction: {
+                    self.fireCameraCompletionHandler(completion)
+                }, grantAction: {
+                    self.showCameraSystemAlert(completion)
+                })
+        }
+    }
+    
+    public func showMicrophonePermission(title: String? = "Allow Microphone Access?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
+        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
+        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+        
+        var authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio)
+        if authorizationStatus == AVAuthorizationStatus.NotDetermined {
+            self.showAlertView(
+                title!,
+                message: message!,
+                denyButtonTitle: denyButtonTitle!,
+                grantButtonTitle: grantButtonTitle!,
+                denyAction: {
+                    println("Fire the microphone completion handler")
+                    self.fireCameraCompletionHandler(completion)
+                }, grantAction: {
+                    println("Show the microphone system alert")
+                    self.showMicrophoneSystemAlert(completion)
+                })
+        }
+    }
 }
 
 // MARK: - Photos
@@ -282,6 +323,50 @@ private extension PresentPrePermissions {
         }
         
         return true
+    }
+}
+
+// MARK - Camera
+private extension PresentPrePermissions {
+    func showCameraSystemAlert(completion: PermissionCompletionHandler?) {
+        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { granted in
+            self.fireCameraCompletionHandler(completion)
+        })
+    }
+    
+    func fireCameraCompletionHandler(completion: PermissionCompletionHandler?) {
+        switch AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) {
+        case .NotDetermined:
+            completion?(granted: false, userDialogResult: .Denied, systemDialogResult: .NoAction)
+        case .Authorized:
+            completion?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
+        case .Denied:
+            completion?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
+        case .Restricted:
+            completion?(granted: false, userDialogResult: .Granted, systemDialogResult: .Restricted)
+        }
+    }
+    
+}
+// MARK - Microphone
+private extension PresentPrePermissions {
+    func showMicrophoneSystemAlert(completion: PermissionCompletionHandler?) {
+        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeAudio, completionHandler: { granted in
+            self.fireMicrophoneCompletionHandler(completion)
+        })
+    }
+    
+    func fireMicrophoneCompletionHandler(completion: PermissionCompletionHandler?) {
+        switch AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio) {
+        case .NotDetermined:
+            completion?(granted: false, userDialogResult: .Denied, systemDialogResult: .NoAction)
+        case .Authorized:
+            completion?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
+        case .Denied:
+            completion?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
+        case .Restricted:
+            completion?(granted: false, userDialogResult: .Granted, systemDialogResult: .Restricted)
+        }
     }
 }
 
