@@ -8,6 +8,8 @@ Pre-permissions library that makes it easy to get permissions from a user.
 - [x] Contacts
 - [x] Location
 - [x] Remote Notifications
+- [x] Camera
+- [x] Microphone
 - [ ] Facebook
 - [ ] Twitter
 
