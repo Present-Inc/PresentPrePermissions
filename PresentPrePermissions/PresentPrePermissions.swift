@@ -66,7 +66,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: (authorizationStatus == ALAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: photoAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -89,7 +89,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: (authorizationStatus == ABAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: contactsAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -116,7 +116,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: self.locationAuthorizationStatusPermitsAccess(authorizationStatus), userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: locationAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -169,7 +169,7 @@ public class PresentPrePermissions: NSObject {
                     self.showCameraSystemAlert(completion)
                 })
         } else {
-            completion?(granted: (authorizationStatus == AVAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: cameraAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -192,8 +192,34 @@ public class PresentPrePermissions: NSObject {
                     self.showMicrophoneSystemAlert(completion)
                 })
         } else {
-            completion?(granted: (authorizationStatus == AVAuthorizationStatus.Authorized), userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: microphoneAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
+    }
+}
+
+public extension PresentPrePermissions {
+    public var photoAccessGranted: Bool {
+        return ALAssetsLibrary.authorizationStatus() == ALAuthorizationStatus.Authorized
+    }
+    
+    public var contactsAccessGranted: Bool {
+        return ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Authorized
+    }
+    
+    public var locationAccessGranted: Bool {
+        return self.locationAuthorizationStatusPermitsAccess(CLLocationManager.authorizationStatus())
+    }
+    
+    public var remoteNotificationAccessGranted: Bool {
+        return self.remoteNotificationsEnabled()
+    }
+    
+    public var cameraAccessGranted: Bool {
+        return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) == AVAuthorizationStatus.Authorized
+    }
+    
+    public var microphoneAccessGranted: Bool {
+        return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio) == AVAuthorizationStatus.Authorized
     }
 }
 
