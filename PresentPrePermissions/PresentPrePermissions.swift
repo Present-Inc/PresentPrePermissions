@@ -344,10 +344,7 @@ private extension PresentPrePermissions {
     
     func remoteNotificationsEnabled() -> Bool {
         if self.remoteNotificationTypes() == UIUserNotificationType.None {
-            println("Push notifications are disabled")
             return false
-        } else {
-            println("Push notifications are enabled")
         }
         
         return true
