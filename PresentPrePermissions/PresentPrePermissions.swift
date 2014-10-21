@@ -431,9 +431,8 @@ private extension PresentPrePermissions {
             )
         )
         
-        var viewController = UIApplication.sharedApplication().keyWindow.rootViewController
-        if viewController != nil {
-            viewController!.presentViewController(alertViewController, animated: true, completion: nil)
+        if let viewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            viewController.presentViewController(alertViewController, animated: true, completion: nil)
         }
     }
 }
