@@ -10,6 +10,8 @@ import UIKit
 import PresentPrePermissions
 
 class ViewController: UIViewController {
+    @IBOutlet private var presentViewController: UIButton?
+    
     var permissionsManager: PresentPrePermissions {
         return PresentPrePermissions.sharedPermissions()
     }
@@ -17,8 +19,8 @@ class ViewController: UIViewController {
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
             println("Was access granted? \(granted)")
-            println("  Pre-permission dialog: \(userResult.toRaw())")
-            println("  System dialog: \(systemResult.toRaw())")
+            println("  Pre-permission dialog: \(userResult.rawValue)")
+            println("  System dialog: \(systemResult.rawValue)")
         }
     }
     
@@ -88,5 +90,10 @@ class ViewController: UIViewController {
                 completion: self.completionHandler
             )
     }
+    
+    @IBAction func dismiss(_: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
 
