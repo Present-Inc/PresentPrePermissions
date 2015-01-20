@@ -431,8 +431,34 @@ private extension PresentPrePermissions {
             )
         )
         
-        if let viewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+        if let viewController = topViewController() {
             viewController.presentViewController(alertViewController, animated: true, completion: nil)
         }
+    }
+    
+    func topViewController() -> UIViewController? {
+        if let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            return topViewController(rootViewController)
+        }
+        
+        return nil
+    }
+    
+    func topViewController(rootViewController: UIViewController) -> UIViewController? {
+        if rootViewController.presentedViewController == nil {
+            return rootViewController
+        }
+        
+        if let navigationController = rootViewController.presentedViewController as? UINavigationController {
+            if let lastViewController = navigationController.viewControllers.last as? UIViewController {
+                return topViewController(lastViewController)
+            }
+        }
+        
+        if let presentedViewController = rootViewController.presentedViewController {
+            return topViewController(presentedViewController)
+        }
+        
+        return nil
     }
 }
