@@ -185,14 +185,23 @@ public class PresentPrePermissions: NSObject {
                 denyButtonTitle: denyButtonTitle!,
                 grantButtonTitle: grantButtonTitle!,
                 denyAction: {
-                    println("Fire the microphone completion handler")
                     self.fireCameraCompletionHandler(completion)
                 }, grantAction: {
-                    println("Show the microphone system alert")
                     self.showMicrophoneSystemAlert(completion)
                 })
         } else {
             completion?(granted: microphoneAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+        }
+    }
+    
+    public func showCameraAndMicrophonePermission(title: String? = "Allow Camera and Microphone Access?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
+        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
+        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+        
+        let authorized = (microphoneAccessGranted && cameraAccessGranted)
+        if !authorized {
+            // TODO: If microphone access is not granted, show the alert view for the microphone
+            // TODO: If camera access is not granted, show the alert view for the camera
         }
     }
 }
@@ -373,6 +382,7 @@ private extension PresentPrePermissions {
     }
     
 }
+
 // MARK - Microphone
 private extension PresentPrePermissions {
     func showMicrophoneSystemAlert(completion: PermissionCompletionHandler?) {
