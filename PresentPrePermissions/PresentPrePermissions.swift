@@ -269,7 +269,7 @@ private extension PresentPrePermissions {
     
     func fireLocationCompletionHandler() {
         switch CLLocationManager.authorizationStatus() {
-        case .Authorized, .AuthorizedWhenInUse:
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             self.locationCompletionHandler?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
         case .Denied:
             self.locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
@@ -284,7 +284,7 @@ private extension PresentPrePermissions {
     }
     
     func locationAuthorizationStatusPermitsAccess(status: CLAuthorizationStatus) -> Bool {
-        return (status == CLAuthorizationStatus.Authorized || status == CLAuthorizationStatus.AuthorizedWhenInUse)
+        return (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)
     }
 }
 
