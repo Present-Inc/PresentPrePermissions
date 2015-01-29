@@ -34,26 +34,13 @@ private enum PresentTitleType {
 public class PresentPrePermissions: NSObject {
     private var locationManager: CLLocationManager?
     private var locationCompletionHandler: PermissionCompletionHandler?
-    
-    public class func sharedPermissions() -> PresentPrePermissions {
-        struct Static {
-            static let instance = PresentPrePermissions()
-        }
 
-        return Static.instance
-    }
     
-    public class func remoteNotificationsDidUpdate() {
-        println("Remote notifications did update")
-    }
-    
-    public func showPhotoPermission(title: String? = "Access Photos?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+    public func showPhotoPermission(title: String? = "Access Photos?", message: String? = "This app needs to access your photos.", denyButtonTitle: String? = "Not Now", grantButtonTitle: String? = "Grant Access", completion: PermissionCompletionHandler?) {
+        let authorizationStatus = ALAssetsLibrary.authorizationStatus()
         
-        var authorizationStatus = ALAssetsLibrary.authorizationStatus()
         if authorizationStatus == ALAuthorizationStatus.NotDetermined {
-            self.showAlertView(
+            showAlertView(
                 title!,
                 message: message!,
                 denyButtonTitle: denyButtonTitle!,
@@ -70,11 +57,9 @@ public class PresentPrePermissions: NSObject {
         }
     }
     
-    public func showContactsPermission(title: String? = "Access Contacts?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+    public func showContactsPermission(title: String? = "Access Contacts?", message: String? = "This app needs to access your contacts.", denyButtonTitle: String? = "Not Now", grantButtonTitle: String? = "Grant Access", completion: PermissionCompletionHandler?) {
+        let authorizationStatus = ABAddressBookGetAuthorizationStatus()
         
-        var authorizationStatus = ABAddressBookGetAuthorizationStatus()
         if authorizationStatus == ABAuthorizationStatus.NotDetermined {
             self.showAlertView(
                 title!,
@@ -96,10 +81,7 @@ public class PresentPrePermissions: NSObject {
     /*
         This requires that the NSLocationWhenInUseUsageDescription key is set in the Info.plist of your application.
      */
-    public func showLocationPermission(title: String? = "Access Location?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, authorizationType: PresentLocationAuthorizationType? = .WhenInUse, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
-        
+    public func showLocationPermission(title: String? = "Access Location?", message: String? = "This app needs to access your location.", denyButtonTitle: String? = "Not Now", grantButtonTitle: String? = "Grant Access", authorizationType: PresentLocationAuthorizationType? = .WhenInUse, completion: PermissionCompletionHandler?) {
         self.locationCompletionHandler = completion
         
         var authorizationStatus = CLLocationManager.authorizationStatus()
@@ -124,22 +106,20 @@ public class PresentPrePermissions: NSObject {
         The completion handler will only be called if notifications are already enabled. application:didRegisterForRemoteNotificationsWithDeviceToken: and 
         application:didFailToRegisterForRemoteNotificationsWithError: should be used as completion for granting access.
      */
-    public func showRemoteNotificationPermission(title: String? = "Allow Push Notifications?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, notificationTypes: UIUserNotificationType? = nil, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
-        
-        if !self.remoteNotificationsEnabled() {
-            self.showAlertView(
+    public func showRemoteNotificationPermission(title: String? = "Allow Push Notifications?", message: String? = "This app would like to send you push notifications.", denyButtonTitle: String? = "Not Now", var grantButtonTitle: String? = "Grant Access", notificationTypes: UIUserNotificationType? = nil) {
+        if !remoteNotificationsEnabled() {
+            showAlertView(
                 title!,
                 message: message!,
                 denyButtonTitle: denyButtonTitle!,
                 grantButtonTitle: grantButtonTitle!,
                 denyAction: {
-                    var application = UIApplication.sharedApplication(),
-                        delegate = application.delegate,
-                        error = NSError(domain: "PresentPrePermissionsErrorDomain", code: -1, userInfo: [
-                            NSLocalizedDescriptionKey: "User denied push notifications prompt via PresentPrePermissions."
-                        ])
+                    let application = UIApplication.sharedApplication()
+                    let delegate = application.delegate
+                    
+                    let error = NSError(domain: "PresentPrePermissionsErrorDomain", code: -1, userInfo: [
+                        NSLocalizedDescriptionKey: "User denied push notifications prompt via PresentPrePermissions."
+                    ])
                     
                     delegate?.application?(application, didFailToRegisterForRemoteNotificationsWithError: error)
                 },
@@ -147,25 +127,22 @@ public class PresentPrePermissions: NSObject {
                     self.showRemoteNotificationSystemAlert(notificationTypes ?? (.Badge | .Alert | .Sound))
                 }
             )
-        } else {
-            completion?(granted: true, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
-    public func showCameraPermission(title: String? = "Allow Camera Access?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
+    public func showCameraPermission(title: String? = "Allow Camera Access?", message: String? = "This app would like to access your camera.", denyButtonTitle: String? = "Not Now", var grantButtonTitle: String? = "Grant Access", completion: PermissionCompletionHandler?) {
+        let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         
-        var authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         if authorizationStatus == AVAuthorizationStatus.NotDetermined {
-            self.showAlertView(
+            showAlertView(
                 title!,
                 message: message!,
                 denyButtonTitle: denyButtonTitle!,
                 grantButtonTitle: grantButtonTitle!,
                 denyAction: {
                     self.fireCameraCompletionHandler(completion)
-                }, grantAction: {
+                },
+                grantAction: {
                     self.showCameraSystemAlert(completion)
                 })
         } else {
@@ -173,13 +150,10 @@ public class PresentPrePermissions: NSObject {
         }
     }
     
-    public func showMicrophonePermission(title: String? = "Allow Microphone Access?", message: String?, var denyButtonTitle: String?, var grantButtonTitle: String?, completion: PermissionCompletionHandler?) {
-        denyButtonTitle = self.title(denyButtonTitle, forTitleType: .Deny)
-        grantButtonTitle = self.title(grantButtonTitle, forTitleType: .Request)
-        
-        var authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio)
+    public func showMicrophonePermission(title: String? = "Allow Microphone Access?", message: String? = "This app would like to access your microphone.", denyButtonTitle: String? = "Not Now", grantButtonTitle: String? = "Grant Access", completion: PermissionCompletionHandler?) {
+        let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio)
         if authorizationStatus == AVAuthorizationStatus.NotDetermined {
-            self.showAlertView(
+            showAlertView(
                 title!,
                 message: message!,
                 denyButtonTitle: denyButtonTitle!,
@@ -187,13 +161,26 @@ public class PresentPrePermissions: NSObject {
                 denyAction: {
                     println("Fire the microphone completion handler")
                     self.fireCameraCompletionHandler(completion)
-                }, grantAction: {
+                },
+                grantAction: {
                     println("Show the microphone system alert")
                     self.showMicrophoneSystemAlert(completion)
                 })
         } else {
             completion?(granted: microphoneAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
+    }
+    
+    public func showCameraAndMicrophonePermission(title: String? = "Allow Camera and Microphone Access?", message: String? = "This app would like to access your camera and microphone.", denyButtonTitle: String? = "Not Now", grantButtonTitle: String? = "Grant Access", completion: PermissionCompletionHandler?) {
+        
+        let cameraStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        let microphoneStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio)
+        
+        let cameraCompletionHandler: PermissionCompletionHandler = { granted, userDialogResult, systemDialogResult in
+            self.showMicrophoneSystemAlert(completion)
+        }
+        
+        showCameraSystemAlert(cameraCompletionHandler)
     }
 }
 
@@ -207,11 +194,11 @@ public extension PresentPrePermissions {
     }
     
     public var locationAccessGranted: Bool {
-        return self.locationAuthorizationStatusPermitsAccess(CLLocationManager.authorizationStatus())
+        return locationAuthorizationStatusPermitsAccess(CLLocationManager.authorizationStatus())
     }
     
     public var remoteNotificationAccessGranted: Bool {
-        return self.remoteNotificationsEnabled()
+        return remoteNotificationsEnabled()
     }
     
     public var cameraAccessGranted: Bool {
@@ -254,33 +241,33 @@ private extension PresentPrePermissions {
 private extension PresentPrePermissions {
     
     func showLocationPermissionSystemAlert(authorizationType: PresentLocationAuthorizationType) {
-        self.locationManager = CLLocationManager()
-        self.locationManager?.delegate = self
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
         
         switch authorizationType {
         case .Always:
-            self.locationManager!.requestAlwaysAuthorization()
+            locationManager!.requestAlwaysAuthorization()
         case .WhenInUse:
-            self.locationManager!.requestWhenInUseAuthorization()
+            locationManager!.requestWhenInUseAuthorization()
         }
         
-        self.locationManager!.startUpdatingLocation()
+        locationManager!.startUpdatingLocation()
     }
     
     func fireLocationCompletionHandler() {
         switch CLLocationManager.authorizationStatus() {
         case .Authorized, .AuthorizedWhenInUse:
-            self.locationCompletionHandler?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
+            locationCompletionHandler?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
         case .Denied:
-            self.locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
+            locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
         case .Restricted:
-            self.locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Restricted)
+            locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Restricted)
         case .NotDetermined:
-            self.locationCompletionHandler?(granted: false, userDialogResult: .Denied, systemDialogResult: .NoAction)
+            locationCompletionHandler?(granted: false, userDialogResult: .Denied, systemDialogResult: .NoAction)
         }
         
-        self.locationManager?.stopUpdatingLocation()
-        self.locationManager = nil
+        locationManager?.stopUpdatingLocation()
+        locationManager = nil
     }
     
     func locationAuthorizationStatusPermitsAccess(status: CLAuthorizationStatus) -> Bool {
@@ -293,7 +280,7 @@ extension PresentPrePermissions: CLLocationManagerDelegate {
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status != .NotDetermined {
-            self.fireLocationCompletionHandler()
+            fireLocationCompletionHandler()
         }
     }
 }
@@ -327,15 +314,11 @@ private extension PresentPrePermissions {
 // MARK - Notifications
 private extension PresentPrePermissions {
     func showRemoteNotificationSystemAlert(notificationType: UIUserNotificationType) {
-        var application = UIApplication.sharedApplication(),
+        let application = UIApplication.sharedApplication(),
             settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
         
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-    }
-    
-    func fireRemoteNotificationCompletionHandler(completion: PermissionCompletionHandler) {
-        println("Completion handler should be fired")
     }
     
     func remoteNotificationTypes() -> UIUserNotificationType {
@@ -400,15 +383,6 @@ private extension PresentPrePermissions {
 
 // MARK: - Helpers
 private extension PresentPrePermissions {
-    func title(var title: String?, forTitleType titleType: PresentTitleType) -> String {
-        switch titleType {
-        case .Deny:
-            return title ?? "Not Now"
-        case .Request:
-            return title ?? "Grant Access"
-        }
-    }
-    
     func showAlertView(title: String, message: String, denyButtonTitle: String, grantButtonTitle: String, denyAction: () -> (), grantAction: () -> ()) {
         var alertViewController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
