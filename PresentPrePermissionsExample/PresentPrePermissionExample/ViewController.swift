@@ -12,15 +12,13 @@ import PresentPrePermissions
 class ViewController: UIViewController {
     @IBOutlet private var presentViewController: UIButton?
     
-    var permissionsManager: PresentPrePermissions {
-        return PresentPrePermissions.sharedPermissions()
-    }
+    var permissionsManager: PresentPrePermissions = PresentPrePermissions()
     
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
             println("Was access granted? \(granted)")
-            println("  Pre-permission dialog: \(userResult.rawValue)")
-            println("  System dialog: \(systemResult.rawValue)")
+            println("\tPre-permission dialog: \(userResult.rawValue)")
+            println("\tSystem dialog: \(systemResult.rawValue)")
         }
     }
     
@@ -54,8 +52,7 @@ class ViewController: UIViewController {
                 message: "I won't abuse it, scout's honor!",
                 denyButtonTitle: "No",
                 grantButtonTitle: "Yes",
-                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound),
-                completion: self.completionHandler
+                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound)
             )
     }
     

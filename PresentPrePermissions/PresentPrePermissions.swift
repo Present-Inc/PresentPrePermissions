@@ -194,7 +194,7 @@ public extension PresentPrePermissions {
     }
     
     public var locationAccessGranted: Bool {
-        return locationAuthorizationStatusPermitsAccess(CLLocationManager.authorizationStatus())
+        return locationAccessAuthorized(CLLocationManager.authorizationStatus())
     }
     
     public var remoteNotificationAccessGranted: Bool {
@@ -256,7 +256,7 @@ private extension PresentPrePermissions {
     
     func fireLocationCompletionHandler() {
         switch CLLocationManager.authorizationStatus() {
-        case .Authorized, .AuthorizedWhenInUse:
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             locationCompletionHandler?(granted: true, userDialogResult: .Granted, systemDialogResult: .Granted)
         case .Denied:
             locationCompletionHandler?(granted: false, userDialogResult: .Granted, systemDialogResult: .Denied)
@@ -270,9 +270,10 @@ private extension PresentPrePermissions {
         locationManager = nil
     }
     
-    func locationAuthorizationStatusPermitsAccess(status: CLAuthorizationStatus) -> Bool {
-        return (status == CLAuthorizationStatus.Authorized || status == CLAuthorizationStatus.AuthorizedWhenInUse)
+    func locationAccessAuthorized(status: CLAuthorizationStatus) -> Bool {
+        return (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)
     }
+    
 }
 
 // MARK: Location Manager Delegate
