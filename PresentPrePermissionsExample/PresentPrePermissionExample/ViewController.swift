@@ -13,14 +13,14 @@ class ViewController: UIViewController {
     var permissionsManager: PresentPrePermissions {
         return PresentPrePermissions.sharedPermissions()
     }
-    
+
     @IBOutlet private var presentViewController: UIButton?
     
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
             println("Was access granted? \(granted)")
-            println("  Pre-permission dialog: \(userResult.rawValue)")
-            println("  System dialog: \(systemResult.rawValue)")
+            println("\tPre-permission dialog: \(userResult.rawValue)")
+            println("\tSystem dialog: \(systemResult.rawValue)")
         }
     }
     
