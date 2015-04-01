@@ -10,9 +10,7 @@ import UIKit
 import PresentPrePermissions
 
 class ViewController: UIViewController {
-    var permissionsManager: PresentPrePermissions {
-        return PresentPrePermissions.sharedPermissions()
-    }
+    var permissionsManager = PresentPrePermissions()
 
     @IBOutlet private var presentViewController: UIButton?
     
