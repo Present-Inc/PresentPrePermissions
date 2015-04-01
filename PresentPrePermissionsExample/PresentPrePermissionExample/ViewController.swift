@@ -10,11 +10,11 @@ import UIKit
 import PresentPrePermissions
 
 class ViewController: UIViewController {
-    @IBOutlet private var presentViewController: UIButton?
-    
     var permissionsManager: PresentPrePermissions {
         return PresentPrePermissions.sharedPermissions()
     }
+    
+    @IBOutlet private var presentViewController: UIButton?
     
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
@@ -26,68 +26,42 @@ class ViewController: UIViewController {
     
     @IBAction func requestPhotoPermissionsPressed(_: AnyObject) {
         permissionsManager
-            .showPhotoPermission(
-                message: "Can I access your photos?",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Sure",
-                completion: self.completionHandler
-            )
+            .showPhotoPermission(completion: completionHandler)
     }
     
-    /**
-        The message presented by the system location prompt is set in the Info.plist
-     */
     @IBAction func requestLocationPermissionsPressed(_: AnyObject) {
         permissionsManager
             .showLocationPermission(
-                message: "Can I access your location?",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Sure",
-                completion: self.completionHandler
+                authorizationType: .Always,
+                completion: completionHandler
             )
     }
     
     @IBAction func requestNotificationPermissionsPressed(_: AnyObject) {
         permissionsManager
             .showRemoteNotificationPermission(
-                title: "Can I send you push notifications?",
-                message: "I won't abuse it, scout's honor!",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Yes",
-                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound),
-                completion: self.completionHandler
+                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound)
             )
     }
     
     @IBAction func requestContactsPermissionPressed(_: AnyObject) {
         permissionsManager
             .showContactsPermission(
-                message: "Can I access your contacts?",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Yes",
-                completion: self.completionHandler
+                completion: completionHandler
             )
     }
     
     @IBAction func requestCameraPermissionsPressed(_: AnyObject) {
         permissionsManager
             .showCameraPermission(
-                title: "Grant Camera Access?",
-                message: "Can I access your camera?",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Yes",
-                completion: self.completionHandler
+                completion: completionHandler
             )
     }
     
     @IBAction func requestMicrophonePermissionsPressed(_: AnyObject) {
         permissionsManager
             .showMicrophonePermission(
-                title: "Grant Microphone Access?",
-                message: "Can I access your microphone?",
-                denyButtonTitle: "No",
-                grantButtonTitle: "Yes",
-                completion: self.completionHandler
+                completion: completionHandler
             )
     }
     

@@ -31,8 +31,6 @@
 
 /* Begin PBXFileReference section */
 		7C1C25A819DA29A30098BE47 /* PresentPrePermissionsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PresentPrePermissionsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C1C25C219DA29A30098BE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C1C25C319DA29A30098BE47 /* PresentPrePermissionsExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentPrePermissionsExampleTests.swift; sourceTree = "<group>"; };
 		7C1C25CC19DA29C00098BE47 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C1C25CE19DA29C00098BE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7C1C25D019DA29C00098BE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			children = (
 				7C2D44391A6F2104005ACB65 /* PresentPrePermissions.framework */,
 				7C1C25CB19DA29C00098BE47 /* PresentPrePermissionExample */,
-				7C1C25C019DA29A30098BE47 /* PresentPrePermissionsExampleTests */,
 				7C1C25A919DA29A30098BE47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,23 +67,6 @@
 				7C1C25A819DA29A30098BE47 /* PresentPrePermissionsExample.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7C1C25C019DA29A30098BE47 /* PresentPrePermissionsExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				7C1C25C319DA29A30098BE47 /* PresentPrePermissionsExampleTests.swift */,
-				7C1C25C119DA29A30098BE47 /* Supporting Files */,
-			);
-			path = PresentPrePermissionsExampleTests;
-			sourceTree = "<group>";
-		};
-		7C1C25C119DA29A30098BE47 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7C1C25C219DA29A30098BE47 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		7C1C25CB19DA29C00098BE47 /* PresentPrePermissionExample */ = {
@@ -207,12 +187,14 @@
 		7C1C25A219DA29780098BE47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
 		7C1C25A319DA29780098BE47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};

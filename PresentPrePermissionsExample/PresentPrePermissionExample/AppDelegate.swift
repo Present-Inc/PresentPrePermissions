@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        println("Did fail to register for remote notifications")
+        println("Did fail to register for remote notifications:\(error)")
     }
 }
 
