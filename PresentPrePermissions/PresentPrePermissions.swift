@@ -75,7 +75,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: photoAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: PresentPrePermissions.photoAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -96,7 +96,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: contactsAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: PresentPrePermissions.contactsAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -121,7 +121,7 @@ public class PresentPrePermissions: NSObject {
                 }
             )
         } else {
-            completion?(granted: locationAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: PresentPrePermissions.locationAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -130,7 +130,7 @@ public class PresentPrePermissions: NSObject {
         application:didFailToRegisterForRemoteNotificationsWithError: should be used as completion for granting access.
      */
     public func showRemoteNotificationPermission(title: String? = nil, message: String? = nil, denyButtonTitle: String? = kDenyButtonTitle, var grantButtonTitle: String? = kGrantButtonTitle, notificationTypes: UIUserNotificationType? = nil) {
-        if !remoteNotificationsEnabled() {
+        if !PresentPrePermissions.remoteNotificationsEnabled() {
             showAlertView(
                 title ?? titleForPermission(.PushNotifications),
                 message: message ?? messageForPermission(.PushNotifications),
@@ -169,7 +169,7 @@ public class PresentPrePermissions: NSObject {
                     self.showCameraSystemAlert(completion)
                 })
         } else {
-            completion?(granted: cameraAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: PresentPrePermissions.cameraAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -190,7 +190,7 @@ public class PresentPrePermissions: NSObject {
                     self.showMicrophoneSystemAlert(completion)
                 })
         } else {
-            completion?(granted: microphoneAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
+            completion?(granted: PresentPrePermissions.microphoneAccessGranted, userDialogResult: .NoAction, systemDialogResult: .NoAction)
         }
     }
     
@@ -208,27 +208,29 @@ public class PresentPrePermissions: NSObject {
 }
 
 public extension PresentPrePermissions {
-    public var photoAccessGranted: Bool {
+    public class var photoAccessGranted: Bool {
         return ALAssetsLibrary.authorizationStatus() == ALAuthorizationStatus.Authorized
     }
     
-    public var contactsAccessGranted: Bool {
+    public class var contactsAccessGranted: Bool {
         return ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Authorized
     }
     
-    public var locationAccessGranted: Bool {
-        return locationAccessAuthorized(CLLocationManager.authorizationStatus())
+    public class var locationAccessGranted: Bool {
+        let status = CLLocationManager.authorizationStatus()
+        
+        return (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)
     }
     
-    public var remoteNotificationAccessGranted: Bool {
+    public class var remoteNotificationAccessGranted: Bool {
         return remoteNotificationsEnabled()
     }
     
-    public var cameraAccessGranted: Bool {
+    public class var cameraAccessGranted: Bool {
         return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) == AVAuthorizationStatus.Authorized
     }
     
-    public var microphoneAccessGranted: Bool {
+    public class var microphoneAccessGranted: Bool {
         return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio) == AVAuthorizationStatus.Authorized
     }
 }
@@ -261,7 +263,6 @@ private extension PresentPrePermissions {
 
 // MARK: - Location
 private extension PresentPrePermissions {
-    
     func showLocationPermissionSystemAlert(authorizationType: PresentLocationAuthorizationType) {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -291,11 +292,6 @@ private extension PresentPrePermissions {
         locationManager?.stopUpdatingLocation()
         locationManager = nil
     }
-    
-    func locationAccessAuthorized(status: CLAuthorizationStatus) -> Bool {
-        return (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)
-    }
-    
 }
 
 // MARK: Location Manager Delegate
@@ -336,18 +332,18 @@ private extension PresentPrePermissions {
 // MARK: - Notifications
 private extension PresentPrePermissions {
     func showRemoteNotificationSystemAlert(notificationType: UIUserNotificationType) {
-        let application = UIApplication.sharedApplication(),
-            settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
+        let application = UIApplication.sharedApplication()
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
         
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
     }
     
-    func remoteNotificationTypes() -> UIUserNotificationType {
+    class func remoteNotificationTypes() -> UIUserNotificationType {
         return UIApplication.sharedApplication().currentUserNotificationSettings().types
     }
     
-    func remoteNotificationsEnabled() -> Bool {
+    class func remoteNotificationsEnabled() -> Bool {
         if self.remoteNotificationTypes() == UIUserNotificationType.None {
             return false
         }
@@ -366,8 +362,6 @@ private extension PresentPrePermissions {
     
     func fireCameraCompletionHandler(completion: PermissionCompletionHandler?) {
         let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-        
-        println(authorizationStatus.rawValue)
         
         switch authorizationStatus {
         case .NotDetermined:
@@ -392,8 +386,6 @@ private extension PresentPrePermissions {
     
     func fireMicrophoneCompletionHandler(completion: PermissionCompletionHandler?) {
         let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeAudio)
-        
-        println(authorizationStatus.rawValue)
         
         switch authorizationStatus {
         case .NotDetermined:
