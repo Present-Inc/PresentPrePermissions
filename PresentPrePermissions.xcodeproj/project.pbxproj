@@ -23,7 +23,6 @@
 		7CEB5F5A19D9F0D900FA8CD3 /* PresentPrePermissions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PresentPrePermissions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEB5F5E19D9F0D900FA8CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CEB5F5F19D9F0D900FA8CD3 /* PresentPrePermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresentPrePermissions.h; sourceTree = "<group>"; };
-		7CEB5F6519D9F0D900FA8CD3 /* PresentPrePermissionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PresentPrePermissionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEB5F7319D9F0EF00FA8CD3 /* PresentPrePermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentPrePermissions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,13 +35,6 @@
 				7CE7CB1219DE30060028C538 /* CoreLocation.framework in Frameworks */,
 				7CE7CB1319DE30060028C538 /* AssetsLibrary.framework in Frameworks */,
 				7CE7CB1419DE30060028C538 /* AVFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CEB5F6219D9F0D900FA8CD3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				7CEB5F5A19D9F0D900FA8CD3 /* PresentPrePermissions.framework */,
-				7CEB5F6519D9F0D900FA8CD3 /* PresentPrePermissionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,36 +119,17 @@
 			productReference = 7CEB5F5A19D9F0D900FA8CD3 /* PresentPrePermissions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7CEB5F6419D9F0D900FA8CD3 /* PresentPrePermissionsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7CEB5F7019D9F0D900FA8CD3 /* Build configuration list for PBXNativeTarget "PresentPrePermissionsTests" */;
-			buildPhases = (
-				7CEB5F6119D9F0D900FA8CD3 /* Sources */,
-				7CEB5F6219D9F0D900FA8CD3 /* Frameworks */,
-				7CEB5F6319D9F0D900FA8CD3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PresentPrePermissionsTests;
-			productName = PresentPrePermissionsTests;
-			productReference = 7CEB5F6519D9F0D900FA8CD3 /* PresentPrePermissionsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		7CEB5F5119D9F0D900FA8CD3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Justin Makaila";
 				TargetAttributes = {
 					7CEB5F5919D9F0D900FA8CD3 = {
-						CreatedOnToolsVersion = 6.0.1;
-					};
-					7CEB5F6419D9F0D900FA8CD3 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
@@ -176,20 +148,12 @@
 			projectRoot = "";
 			targets = (
 				7CEB5F5919D9F0D900FA8CD3 /* PresentPrePermissions */,
-				7CEB5F6419D9F0D900FA8CD3 /* PresentPrePermissionsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7CEB5F5819D9F0D900FA8CD3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CEB5F6319D9F0D900FA8CD3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,13 +168,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEB5F7419D9F0EF00FA8CD3 /* PresentPrePermissions.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CEB5F6119D9F0D900FA8CD3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +196,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -318,6 +276,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "tv.present.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -338,38 +297,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "tv.present.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		7CEB5F7119D9F0D900FA8CD3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PresentPrePermissionsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		7CEB5F7219D9F0D900FA8CD3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PresentPrePermissionsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -390,15 +320,6 @@
 			buildConfigurations = (
 				7CEB5F6E19D9F0D900FA8CD3 /* Debug */,
 				7CEB5F6F19D9F0D900FA8CD3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7CEB5F7019D9F0D900FA8CD3 /* Build configuration list for PBXNativeTarget "PresentPrePermissionsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7CEB5F7119D9F0D900FA8CD3 /* Debug */,
-				7CEB5F7219D9F0D900FA8CD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

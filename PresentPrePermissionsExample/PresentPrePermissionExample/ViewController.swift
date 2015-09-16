@@ -16,9 +16,9 @@ class ViewController: UIViewController {
     
     private var completionHandler: PermissionCompletionHandler {
         return { granted, userResult, systemResult in
-            println("Was access granted? \(granted)")
-            println("\tPre-permission dialog: \(userResult.rawValue)")
-            println("\tSystem dialog: \(systemResult.rawValue)")
+            print("Was access granted? \(granted)")
+            print("\tPre-permission dialog: \(userResult.rawValue)")
+            print("\tSystem dialog: \(systemResult.rawValue)")
         }
     }
     
@@ -36,10 +36,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func requestNotificationPermissionsPressed(_: AnyObject) {
+        let notificationTypes = UIUserNotificationType(rawValue: UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue)
+        
         permissionsManager
-            .showRemoteNotificationPermission(
-                notificationTypes: (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound)
-            )
+            .showRemoteNotificationPermission(notificationTypes: notificationTypes)
     }
     
     @IBAction func requestContactsPermissionPressed(_: AnyObject) {
