@@ -19,11 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        println("Did successfully register for remote notifications")
+        print("Did successfully register for remote notifications")
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        println("Did fail to register for remote notifications:\(error)")
+        print("Did fail to register for remote notifications:\(error)")
     }
 }
 
